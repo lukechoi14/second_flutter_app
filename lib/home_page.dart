@@ -17,10 +17,47 @@ class _MyHomePageState extends State<MyHomePage> {
         child: Scaffold(
           body: Column(
             children: [
-              Row(
-                children: const [
-                  ImageIcon(AssetImage("img/menu.png"),size: 24,color: Colors.black,)
+              Container(
+                margin: const EdgeInsets.only(left: 20,right: 20),
+                child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  const ImageIcon(AssetImage("img/menu.png"),size: 24,color: Colors.black,),
+                  Row(
+                    children: const [
+                      Icon(Icons.search,size: 24,),
+                      SizedBox(width: 10,),
+                      Icon(Icons.notifications,size: 24,),
+                    ],
+                  )
                 ],
+              )
+              ),
+              const SizedBox(height: 20,),
+              Row(
+                children:[
+                Container(
+                  margin: const EdgeInsets.only(left:20),
+                  child: const Text("Popular Books",style: TextStyle(fontSize: 30),)
+                )
+                ]
+              ),
+              Container(
+                height: 180,
+                child: PageView.builder(
+                    controller: PageController(viewportFraction: 0.8),
+                    itemCount: 5,
+                    itemBuilder: ( _ , i){
+                  return Container(
+                    height: 180,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(15),
+                      image: const DecorationImage(
+                        image: AssetImage("img/pic-8.png")
+                      )
+                    ),
+                  );
+                })
               )
             ],
           ),

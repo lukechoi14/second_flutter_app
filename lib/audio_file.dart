@@ -172,9 +172,9 @@ class _AudioFileState extends State<AudioFile> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
 
               children: [
-                Text(_position.toString().split(".")[0], style: TextStyle(fontSize: 16),),
+                Text(_position.toString().split(".")[0], style: const TextStyle(fontSize: 16),),
 
-                Text(_duration.toString().split(".")[0], style: TextStyle(fontSize: 16),),
+                Text(_duration.toString().split(".")[0], style: const TextStyle(fontSize: 16),),
               ],
             ),
           ),
