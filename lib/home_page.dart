@@ -44,6 +44,14 @@ class _MyHomePageState extends State<MyHomePage> {
               ),
               Container(
                 height: 180,
+                child: Stack(
+                  children: [
+                    Positioned(
+                      top:0,
+                      left: 0,
+                      right: 0,
+                      child:Container(
+                height: 180,
                 child: PageView.builder(
                     controller: PageController(viewportFraction: 0.8),
                     itemCount: 5,
@@ -58,6 +66,12 @@ class _MyHomePageState extends State<MyHomePage> {
                     ),
                   );
                 })
+              )
+
+                      ),
+
+                  ],
+                )
               )
             ],
           ),
