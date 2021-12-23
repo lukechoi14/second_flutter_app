@@ -42,13 +42,14 @@ class _MyHomePageState extends State<MyHomePage> {
                 )
                 ]
               ),
+              SizedBox(height:20),
               Container(
                 height: 180,
                 child: Stack(
                   children: [
                     Positioned(
                       top:0,
-                      left: 0,
+                      left: -20,
                       right: 0,
                       child:Container(
                 height: 180,
@@ -58,10 +59,13 @@ class _MyHomePageState extends State<MyHomePage> {
                     itemBuilder: ( _ , i){
                   return Container(
                     height: 180,
+                    width: MediaQuery.of(context).size.width,
+                    margin: const EdgeInsets.only(right:10),
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(15),
                       image: const DecorationImage(
-                        image: AssetImage("img/pic-8.png")
+                        image: AssetImage("img/pic-8.png"),
+                        fit: BoxFit.fill
                       )
                     ),
                   );
