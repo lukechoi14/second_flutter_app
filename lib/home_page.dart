@@ -1,7 +1,7 @@
 import 'dart:convert';
 
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+// ignore: library_prefixes
 import 'package:second_flutter_app/app_color.dart' as AppColors;
 class MyHomePage extends StatefulWidget {
   const MyHomePage({Key? key}) : super(key: key);
@@ -10,8 +10,10 @@ class MyHomePage extends StatefulWidget {
   _MyHomePageState createState() => _MyHomePageState();
 }
 
-class _MyHomePageState extends State<MyHomePage> {
-   List? popularBooks;
+class _MyHomePageState extends State<MyHomePage> with SingleTickerProviderStateMixin {
+  List? popularBooks;
+  ScrollController? _scrollController;
+  TabController? _tapController;
    // ignore: non_constant_identifier_names
    ReadData() async {
      await DefaultAssetBundle.of(context).loadString("json/popularBooks.json").then((s){
@@ -25,6 +27,7 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   void initState(){
     super.initState();
+    _tapController = TabController(length: 3, vsync: this);
     ReadData();
   }
 
@@ -61,8 +64,8 @@ class _MyHomePageState extends State<MyHomePage> {
                 )
                 ]
               ),
-              SizedBox(height:20),
-              Container(
+              const SizedBox(height:20),
+              SizedBox(
                 height: 180,
                 child: Stack(
                   children: [
@@ -70,11 +73,12 @@ class _MyHomePageState extends State<MyHomePage> {
                       top:0,
                       left: -20,
                       right: 0,
-                      child:Container(
+                      child: SizedBox(
                 height: 180,
                 child: PageView.builder(
                     controller: PageController(viewportFraction: 0.8),
                     // ignore: unnecessary_null_comparison
+                    // itemCount: 5,
                     itemCount: popularBooks==null?0:popularBooks!.length,
                     itemBuilder: ( _ , i){
                   return Container(
@@ -85,6 +89,8 @@ class _MyHomePageState extends State<MyHomePage> {
                       borderRadius: BorderRadius.circular(15),
                       image: DecorationImage(
                         image: AssetImage(popularBooks![i]["img"]),
+                          // "img/pic-6.png"
+                          // popularBooks![i]["img"]
                         fit: BoxFit.fill
                       )
                     ),
@@ -96,7 +102,10 @@ class _MyHomePageState extends State<MyHomePage> {
 
                   ],
                 )
-              )
+              ),
+              Expanded(child: NestedScrollView(
+
+              ))
             ],
           ),
         ),
