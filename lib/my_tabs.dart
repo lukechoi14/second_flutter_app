@@ -21,7 +21,7 @@ class AppTabs extends StatelessWidget {
             BoxShadow(
               color: Colors.grey.withOpacity(0.3),
               blurRadius: 7,
-              offset: Offset(0,0),
+              offset: const Offset(0,0),
             )
           ]
       ),
