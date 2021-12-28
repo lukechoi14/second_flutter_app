@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:second_flutter_app/detail_audio_page.dart';
 
 import 'home_page.dart';
 
@@ -27,7 +28,7 @@ class MyApp extends StatelessWidget {
         // is not restarted.
         primarySwatch: Colors.blue,
       ),
-      home: const MyHomePage(),
+      home: const DetailAudioPage(),
     );
   }
 }
