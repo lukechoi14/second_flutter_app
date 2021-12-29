@@ -1,6 +1,9 @@
+import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:second_flutter_app/app_color.dart' as AppColors;
+import 'package:second_flutter_app/audio_file.dart';
+
 
 class DetailAudioPage extends StatefulWidget {
   const DetailAudioPage({Key? key}) : super(key: key);
@@ -10,6 +13,14 @@ class DetailAudioPage extends StatefulWidget {
 }
 
 class _DetailAudioPageState extends State<DetailAudioPage> {
+  AudioPlayer? advancedPlayer;
+
+  @override
+  void initState(){
+    super.initState();
+    advancedPlayer= AudioPlayer();
+  }
+
   @override
   Widget build(BuildContext context) {
     final double screenHeight= MediaQuery.of(context).size.height;
@@ -65,8 +76,8 @@ class _DetailAudioPageState extends State<DetailAudioPage> {
                     ),),
                     Text("Martin Hyatt",style:TextStyle(
                       fontSize: 20,
-
-                    ),)
+                    ),),
+                    AudioFile(advancedPlayer: advancedPlayer!, audioPath: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-16.mp3")
                   ],
                 ),
               )),
