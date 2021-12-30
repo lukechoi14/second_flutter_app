@@ -1,3 +1,4 @@
+
 import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -26,6 +27,7 @@ class _AudioFileState extends State<AudioFile> {
   @override
   void initState(){
     super.initState();
+    // if(this.mounted){
     widget.advancedPlayer.onDurationChanged.listen((d) {setState(() {
       _duration=d;
     });});
@@ -46,6 +48,7 @@ class _AudioFileState extends State<AudioFile> {
         }
       });
     });
+    // }
   }
 
   Widget btnStart() {
@@ -53,15 +56,23 @@ class _AudioFileState extends State<AudioFile> {
       padding: const EdgeInsets.only(bottom: 10),
       icon:isPlaying==false?Icon(_icons[0], size:50, color:Colors.blue):Icon(_icons[1], size:50, color:Colors.blue),
       onPressed: (){
-        if(isPlaying==false) {
-          this.widget.advancedPlayer.play(this.widget.audioPath);
+        if(isPlaying==false&&isPaused==false) {
+          widget.advancedPlayer.play(widget.audioPath);
           setState(() {
             isPlaying = true;
           });
-        }else if(isPlaying==true){
-          this.widget.advancedPlayer.pause();
+        }else if(isPlaying==false&&isPaused==true) {
+          widget.advancedPlayer.resume();
+          setState(() {
+            isPlaying = true;
+            isPaused = false;
+          });
+        }
+          else if(isPlaying==true){
+          widget.advancedPlayer.pause();
           setState(() {
             isPlaying=false;
+            isPaused=true;
           });
         }
       },
@@ -77,7 +88,7 @@ class _AudioFileState extends State<AudioFile> {
           color: Colors.black,
         ),
         onPressed: () {
-          widget.advancedPlayer.setPlaybackRate(1.5);
+          // widget.advancedPlayer.setPlaybackRate(1.5);
         },
       );
   }
@@ -89,7 +100,8 @@ class _AudioFileState extends State<AudioFile> {
         color: Colors.black,
       ),
       onPressed: () {
-        widget.advancedPlayer.setPlaybackRate(0.5);
+        // widget.advancedPlayer.play(widget.audioPath);
+        // widget.advancedPlayer.setPlaybackRate(0.5);
 
       },
     );
@@ -113,13 +125,13 @@ class _AudioFileState extends State<AudioFile> {
       ),
       onPressed: (){
         if(isRepeat==false){
-          this.widget.advancedPlayer.setReleaseMode(ReleaseMode.LOOP);
+          widget.advancedPlayer.setReleaseMode(ReleaseMode.LOOP);
           setState(() {
             isRepeat=true;
             color=Colors.blue;
           });
         }else if(isRepeat==true){
-          this.widget.advancedPlayer.setReleaseMode(ReleaseMode.RELEASE);
+          widget.advancedPlayer.setReleaseMode(ReleaseMode.RELEASE);
           color=Colors.black;
           isRepeat=false;
         }
@@ -143,7 +155,7 @@ class _AudioFileState extends State<AudioFile> {
 
   void changeToSecond(int second){
     Duration newDuration = Duration(seconds: second);
-    this.widget.advancedPlayer.seek(newDuration);
+    widget.advancedPlayer.seek(newDuration);
   }
 
   Widget loadAsset() {
@@ -171,7 +183,6 @@ class _AudioFileState extends State<AudioFile> {
             padding: const EdgeInsets.only(left: 20, right: 20),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
-
               children: [
                 Text(_position.toString().split(".")[0], style: const TextStyle(fontSize: 16),),
 

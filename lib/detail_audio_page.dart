@@ -6,7 +6,9 @@ import 'package:second_flutter_app/audio_file.dart';
 
 
 class DetailAudioPage extends StatefulWidget {
-  const DetailAudioPage({Key? key}) : super(key: key);
+  final booksData;
+  final int? index;
+  const DetailAudioPage({Key? key,this.booksData,this.index}) : super(key: key);
 
   @override
   _DetailAudioPageState createState() => _DetailAudioPageState();
@@ -45,7 +47,9 @@ class _DetailAudioPageState extends State<DetailAudioPage> {
               child: AppBar(
                 leading: IconButton(
                   icon: Icon(Icons.arrow_back_ios),
-                  onPressed: (){},
+                  onPressed: (){
+                    advancedPlayer?.stop();
+                    Navigator.of(context).pop();},
                 ),
                 actions: [
                   IconButton(
@@ -69,15 +73,15 @@ class _DetailAudioPageState extends State<DetailAudioPage> {
                 child: Column(
                   children: [
                     SizedBox(height: screenHeight*0.1,),
-                    Text("THE WATER CURE",style: TextStyle(
+                    Text(widget.booksData[widget.index]["title"],style: TextStyle(
                       fontSize: 30,
                       fontWeight: FontWeight.bold,
                       fontFamily: "Avenir"
                     ),),
-                    Text("Martin Hyatt",style:TextStyle(
+                    Text(widget.booksData[widget.index]["text"],style:TextStyle(
                       fontSize: 20,
                     ),),
-                    AudioFile(advancedPlayer: advancedPlayer!, audioPath: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-16.mp3")
+                    AudioFile(advancedPlayer: advancedPlayer!, audioPath: widget.booksData[widget.index]["audio"])
                   ],
                 ),
               )),
@@ -101,7 +105,7 @@ class _DetailAudioPageState extends State<DetailAudioPage> {
                         shape: BoxShape.circle,
                         border: Border.all(color: Colors.white, width: 5),
                         image: DecorationImage(
-                          image: AssetImage("img/pic-1.png"),
+                          image: AssetImage(widget.booksData[widget.index]["img"]),
                           fit: BoxFit.cover
                         )
                     ),

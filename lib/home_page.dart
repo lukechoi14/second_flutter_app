@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 // ignore: library_prefixes
 import 'package:second_flutter_app/app_color.dart' as AppColors;
+import 'package:second_flutter_app/detail_audio_page.dart';
 import 'package:second_flutter_app/my_tabs.dart';
 class MyHomePage extends StatefulWidget {
   const MyHomePage({Key? key}) : super(key: key);
@@ -155,7 +156,12 @@ class _MyHomePageState extends State<MyHomePage> with SingleTickerProviderStateM
                     ListView.builder(
                         itemCount: books==null?0:books!.length,
                         itemBuilder: (_,i){
-                      return Container(
+                      return GestureDetector(
+                        onTap: (){
+                          Navigator.push(context,
+                          MaterialPageRoute(builder: (context)=>DetailAudioPage(booksData:books,index:i)));
+                        },
+                        child:Container(
                         margin: const EdgeInsets.only(left:20,right: 20,top: 10,bottom: 10),
                         child: Container(
                           decoration: BoxDecoration(
@@ -216,6 +222,7 @@ class _MyHomePageState extends State<MyHomePage> with SingleTickerProviderStateM
                           ),
                         ),
                         ),
+                      )
                       );
                     }),
                     const Material(
